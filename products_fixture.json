@@ -1,0 +1,28 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Самый быстрый зарядка",
+        "description": null,
+        "image": "",
+        "category": 2,
+        "price": 1000,
+        "created_at": "2025-03-03",
+        "updated_at": "2025-03-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Айфон 18",
+        "description": null,
+        "image": "",
+        "category": 1,
+        "price": 500000,
+        "created_at": "2025-03-03",
+        "updated_at": "2025-03-03"
+    }
+}
+]
