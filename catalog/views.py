@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from django.views.generic import DetailView, ListView, TemplateView
 from .models import Product
 
 
-def contacts(request):
-    return render(request, 'contacts.html')
+class ProductTemplateView(TemplateView):
+    model = Product
+    template_name = "catalog/contacts.html"
 
 
 class ProductDetailView(DetailView):
