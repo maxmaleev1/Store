@@ -28,8 +28,10 @@
                         <li>- Дата обновления: {{ product.updated_at|date:"d M Y" }}</li>
                     </ul>
                     <div class="card-body">
-                    <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
-                    <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
+                        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+                        {% endif %}
                     </div>
                     <button type="button" class="btn btn-lg btn-block btn-outline-primary">Срочно купить</button>
                 </div>
@@ -37,7 +39,7 @@
         </div>
         {% endfor %}
         <div class="container">
-        <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-3">Создать новую карточку товара</a>
+        <a href="{% url 'catalog:product_create' %}" class="p-2 btn btn-outline-primary">Создать новую карточку товара</a>
         </div>
     </div>
 </div>
