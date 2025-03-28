@@ -26,9 +26,11 @@
                         <li>- Описание: {{ product.description|truncatechars:100 }}</li>
                         <li>- Дата создания: {{ product.created_at|date:"d M Y" }}</li>
                         <li>- Дата обновления: {{ product.updated_at|date:"d M Y" }}</li>
+                        <li>- Статус публикации: {{ product.publication_status }}</li>
+                        <li>- Владелец: {{ product.owner }}</li>
                     </ul>
                     <div class="card-body">
-                        {% if user.is_authenticated %}
+                        {% if perms.product.can_unpublish_product and perms.product.can_delete_product or user == product.owner %}
                         <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
                         <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
                         {% endif %}
