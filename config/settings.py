@@ -109,3 +109,13 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'skystore.blog@mail.ru'
 EMAIL_HOST_PASSWORD = 'YUw7P1Tx2Fy1mufq2ea6'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+CACHE_ENABLED = False
+if CACHE_ENABLED:
+    CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    }
+}

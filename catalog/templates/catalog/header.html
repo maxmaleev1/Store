@@ -2,6 +2,8 @@
         <h5 class="my-0 mr-md-auto font-weight-normal">Store</h5>
         <nav class="ms-5">
             <a class="p-2 btn btn-outline-primary" href="/catalog/products/">Продукты</a>
+            <a class="p-2 btn btn-outline-primary" href="/catalog/products/category/1/">Телефоны</a>
+            <a class="p-2 btn btn-outline-primary" href="/catalog/products/category/2/">Зарядные устройства</a>
             {% if user.is_authenticated %}
                 <a class="p-2 btn btn-outline-primary" href="/catalog/products/create">Создать новую карточку товара</a>
             {% endif %}
