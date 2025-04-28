@@ -1,0 +1,48 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Store Home page{% endblock %}
+{% load catalog_tags %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">СПИСОК ПРОДУКТОВ</h1>
+    <p class="lead">{{ categories.name }}</p>
+</div>
+<div class="container">
+    <div class="row text-center">
+        {% for product in product_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
+                </div>
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <img class='product-image' src="{{ product.image|media_filter }}">
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ product.price }} ₽</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- Категория: {{ product.category|truncatechars:10 }}</li>
+                        <li>- Описание: {{ product.description|truncatechars:100 }}</li>
+                        <li>- Дата создания: {{ product.created_at|date:"d M Y" }}</li>
+                        <li>- Дата обновления: {{ product.updated_at|date:"d M Y" }}</li>
+                        <li>- Статус публикации: {{ product.publication_status }}</li>
+                        <li>- Владелец: {{ product.owner }}</li>
+                    </ul>
+                    <div class="card-body">
+                        {% if perms.product.can_unpublish_product and perms.product.can_delete_product or user == product.owner %}
+                        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-secondary">Редактировать</a>
+                        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger">Удалить</a>
+                        {% endif %}
+                    </div>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Срочно купить</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="container">
+        <a href="{% url 'catalog:product_create' %}" class="p-2 btn btn-outline-primary">Создать новую карточку товара</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
