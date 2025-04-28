@@ -38,19 +38,20 @@ class ProductForm(forms.ModelForm):
             'class': 'form-control'
         })
 
-    def clean_name(self):
+    def clean(self):
+        cleaned_data = super().clean()
         block_list = constanta.BLOCK_LIST
-        name = self.cleaned_data.get('name')
-        if name.lower() in block_list:
-            raise ValidationError('Имя имеет запрещенное слово')
-        return name
 
-    def clean_description(self):
-        block_list = constanta.BLOCK_LIST
-        description = self.cleaned_data.get('description')
-        if description.lower() in block_list:
-            raise ValidationError('Описание имеет запрещенное слово')
-        return description
+        name = cleaned_data.get('name')
+        description = cleaned_data.get('description')
+
+        if name and name.lower() in block_list:
+            raise ValidationError('Имя содержит запрещенное слово')
+
+        if description and description.lower() in block_list:
+            raise ValidationError('Описание содержит запрещенное слово')
+
+        return cleaned_data
 
     def clean_price(self):
         price = self.cleaned_data.get('price')
